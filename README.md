@@ -1,6 +1,8 @@
 # rucio-mcp — one MCP server for the Rucio community
 
-Slides for the **Rucio community discussion** (2026-07-09) by Giordon Stark
+Slides for the
+[**Rucio community discussion**](https://indico.cern.ch/event/1701185/)
+(Indico: "Rucio Meeting", 2026-07-09) by Giordon Stark
 (UC Santa Cruz / SCIPP): a 15-minute pitch (12 min talk + 3 min live demo) for
 converging on a single, community-maintained MCP server for Rucio instead of
 per-experiment implementations.
