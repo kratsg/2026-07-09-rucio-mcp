@@ -33,9 +33,9 @@
             <p class="subtitle">One MCP server for the Rucio community</p>
             <p class="byline" style="margin-top: 28px;">Giordon Stark &middot; UC Santa Cruz / SCIPP</p>
             <p class="text-sm text-muted mono" style="margin-top: 18px;">
-              github.com/kratsg/rucio-mcp<br>
-              rucio-mcp.readthedocs.io<br>
-              rucio-mcp.af.uchicago.edu
+              <a class="quiet" href="https://github.com/kratsg/rucio-mcp">github.com/kratsg/rucio-mcp</a><br>
+              <a class="quiet" href="https://rucio-mcp.readthedocs.io">rucio-mcp.readthedocs.io</a><br>
+              <a class="quiet" href="https://rucio-mcp.af.uchicago.edu">rucio-mcp.af.uchicago.edu</a>
             </p>
           </div>
           <div class="terminal">
@@ -226,7 +226,7 @@
                 <p class="pill">cms</p>
                 <p class="pill">dune</p>
                 <p class="pill">escape</p>
-                <p class="pill" style="border-style: dashed;">belleii &middot; PR #38 open</p>
+                <p class="pill" style="border-style: dashed;">belleii &middot; <a href="https://github.com/kratsg/rucio-mcp/pull/38">PR #38 open</a></p>
               </div>
               <ul>
                 <li>A preset is just the site's <code>rucio.cfg</code> + one registry entry</li>
@@ -239,7 +239,7 @@
               <ul>
                 <li>Each site ships a markdown file the LLM reads as an MCP resource: dataset naming, scopes, conventions</li>
                 <li>ATLAS one exists (AMI tags, DAOD formats, DID structure)</li>
-                <li><strong>Open invitations</strong>: DUNE <span class="mono text-sm">#30</span>, CMS <span class="mono text-sm">#31</span>, ESCAPE <span class="mono text-sm">#32</span></li>
+                <li><strong>Open invitations</strong>: DUNE <a class="mono text-sm" href="https://github.com/kratsg/rucio-mcp/issues/30">#30</a>, CMS <a class="mono text-sm" href="https://github.com/kratsg/rucio-mcp/issues/31">#31</a>, ESCAPE <a class="mono text-sm" href="https://github.com/kratsg/rucio-mcp/issues/32">#32</a></li>
               </ul>
             </div>
           </div>
@@ -397,7 +397,7 @@
                 <p><span class="dim">// .mcp.json &mdash; any experiment, same server</span></p>
                 <p>"rucio-dune": {</p>
                 <p>&nbsp;&nbsp;"type": "http",</p>
-                <p>&nbsp;&nbsp;"url": <span class="cmd">"https://rucio-mcp.af.uchicago.edu/site/dune/"</span></p>
+                <p>&nbsp;&nbsp;"url": <a class="quiet cmd" href="https://rucio-mcp.af.uchicago.edu/site/dune/">"https://rucio-mcp.af.uchicago.edu/site/dune/"</a></p>
                 <p>}</p>
               </div>
             </div>
@@ -500,7 +500,7 @@
           <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 28px;">
             <div>
               <ul class="text-lg">
-                <li>Stock Claude Code, connected to <span class="mono text-sm">rucio-mcp.af.uchicago.edu</span> with only a URL</li>
+                <li>Stock Claude Code, connected to <a class="mono text-sm" href="https://rucio-mcp.af.uchicago.edu">rucio-mcp.af.uchicago.edu</a> with only a URL</li>
                 <li>Log in live through the OAuth bridge with my own identity</li>
                 <li>Then ask it real questions. Suggest your own!</li>
               </ul>
@@ -549,7 +549,7 @@
             <div class="callout cyan">
               <p>To C&eacute;dric, and the EIC and DUNE folks: you proved everyone wants this. <strong>Let's finish it once, together.</strong></p>
             </div>
-            <p class="text-sm text-muted mono">github.com/kratsg/rucio-mcp &middot; rucio-mcp.readthedocs.io &middot; rucio-mcp.af.uchicago.edu &middot; backup slides below &darr;</p>
+            <p class="text-sm text-muted mono"><a class="quiet" href="https://github.com/kratsg/rucio-mcp">github.com/kratsg/rucio-mcp</a> &middot; <a class="quiet" href="https://rucio-mcp.readthedocs.io">rucio-mcp.readthedocs.io</a> &middot; <a class="quiet" href="https://rucio-mcp.af.uchicago.edu">rucio-mcp.af.uchicago.edu</a> &middot; backup slides below &darr;</p>
           </div>
           <aside class="notes">
             End warm and concrete: a five-minute action, a one-PR action, and the community
@@ -569,7 +569,7 @@
               <li><p>Client exchanges the code at <code>/token</code> &rarr; <code>access_token</code> <strong>is</strong> the Rucio session token; <code>expires_in</code> mirrors the token's real expiry, no refresh tokens</p></li>
               <li><p>Tool calls carry the bearer &rarr; injected as <code>X-Rucio-Auth-Token</code>; 401 from Rucio &rarr; client re-runs the flow</p></li>
             </ol>
-            <p class="text-muted">Full sequence diagram: rucio-mcp.readthedocs.io &rarr; &ldquo;Rucio OAuth Bridge Architecture&rdquo;. Upstream flow discussion: rucio/rucio#8568.</p>
+            <p class="text-muted">Full sequence diagram: <a href="https://rucio-mcp.readthedocs.io/en/latest/rucio-oauth-bridge/">rucio-mcp.readthedocs.io &rarr; &ldquo;Rucio OAuth Bridge Architecture&rdquo;</a>. Upstream flow discussion: <a href="https://github.com/rucio/rucio/discussions/8568">rucio/rucio#8568</a>.</p>
           </div>
           <aside class="notes">
             For auth-deep questions: why polling and not the webhome cookie (cross-domain fails)
