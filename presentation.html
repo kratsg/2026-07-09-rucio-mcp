@@ -39,11 +39,11 @@
             </p>
           </div>
           <div class="terminal">
-            <div class="terminal-bar"><i></i><i></i><i></i><p>claude &mdash; analysis facility</p></div>
+            <div class="terminal-bar"><i></i><i></i><i></i><p>claude &mdash; real session &middot; 2026-07-08</p></div>
             <div class="terminal-body">
-              <p><span class="prompt">&gt;</span> which sites have a complete replica of my DAOD_PHYS dataset?</p>
-              <p class="dim">&#9210; rucio_list_dataset_replicas(scope=..., name=...)</p>
-              <p>&#10003; Complete at <span class="cmd">MWT2_UC_LOCALGROUPDISK</span> and <span class="cmd">CERN-PROD_DATADISK</span>;<br>&nbsp;&nbsp;92% at PRAGUELCG2_DATADISK (transfer in progress).</p>
+              <p><span class="prompt">&gt;</span> which sites have a complete replica of my DAOD_PHYS container?</p>
+              <p class="dim">&#9210; rucio_list_container_replicas<br>&nbsp;&nbsp;(mc20_13TeV:&hellip;700320&hellip;DAOD_PHYS&hellip;p6697)</p>
+              <p>&#10003; <span class="cmd">NET2_DATADISK</span>: 100% complete (821.17 GB, 558 files).<br>&nbsp;&nbsp;Five other sites hold only partial scratch fragments.</p>
             </div>
           </div>
         </div>
@@ -509,7 +509,7 @@
               <div class="terminal-bar"><i></i><i></i><i></i><p>prompts on deck</p></div>
               <div class="terminal-body">
                 <p><span class="prompt">&gt;</span> find DAOD_PHYS containers for DSID 700320 in mc20_13TeV</p>
-                <p><span class="prompt">&gt;</span> which sites have a complete replica, and how big is it?</p>
+                <p><span class="prompt">&gt;</span> which sites have a complete replica of the p6697 one, and how big is it?</p>
                 <p><span class="prompt">&gt;</span> do I have any stuck or suspended rules? group them by error</p>
                 <p><span class="prompt">&gt;</span> what's my quota and usage at MWT2_UC_LOCALGROUPDISK?</p>
               </div>
@@ -523,6 +523,13 @@
           shifter-relevant one that lands with this audience, same as Cedric's demo did. Invite a
           question from the room if time allows: unscripted answers are the convincing part.
           Keep an eye on the clock; cut at three minutes regardless.
+
+          Dry run 2026-07-08 (real session, gstark): all four prompts took 14 tool calls total,
+          none slower than a few seconds. Known trap: several 700320 DAOD_PHYS containers are
+          EMPTY under older p-tags (p5855, p4926 have no child datasets); p6697 is verified good
+          (821.17 GB, 558 files, 100% at NET2_DATADISK), hence "the p6697 one" in prompt two.
+          Expected answers: prompt three returns zero stuck rules for gstark (that's fine, say
+          "clean bill of health"); prompt four returns quota 272.85 TB, used 108.89 TB.
         </aside>
       </section>
 
