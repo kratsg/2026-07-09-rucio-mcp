@@ -32,7 +32,7 @@ jobs:
           # stamp the deployed build so you can tell which version is live
           SHORT_SHA="${GITHUB_SHA::7}"
           STAMP="${SHORT_SHA} · $(date -u +%Y-%m-%d)"
-          sed -i "s|<span id=\"buildstamp\">dev</span>|<span id=\"buildstamp\">${STAMP}</span>|" _site/index.html
+          sed -i "s|<span id=\"buildstamp\">dev</span>|<span id=\"buildstamp\"><a href=\"https://github.com/kratsg/2026-07-09-rucio-mcp/commit/${GITHUB_SHA}\">${STAMP}</a></span>|" _site/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
