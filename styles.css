@@ -1,0 +1,415 @@
+/* rucio-mcp pitch deck — "control-room" theme
+ *
+ * Dark ink-navy background, electric-cyan primary accent, warm-amber secondary.
+ * Space Grotesk headings / Inter body / JetBrains Mono for tool names, kickers,
+ * and terminal boxes. All font sizes in pt (fixed 1280x720 slides).
+ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ===========================================
+   CSS VARIABLES
+   =========================================== */
+:root {
+  --background-color: #0d1524;              /* deep ink navy */
+  --section-divider-bg: #0a101c;            /* slightly darker for dividers */
+
+  /* Typography - ALWAYS use pt for font sizes */
+  --heading-font: "Space Grotesk", Helvetica, sans-serif;
+  --body-font: "Inter", Helvetica, sans-serif;
+  --mono-font: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  --base-font-size: 32px;   /* Only px value - sets reveal.js base */
+  --text-size: 16pt;
+  --h1-size: 46pt;
+  --h2-size: 32pt;
+  --h3-size: 21pt;
+  --footnote-size: 11pt;
+
+  /* Colors */
+  --primary-color: #4fd6e8;    /* electric cyan */
+  --secondary-color: #f2b34c;  /* warm amber */
+  --good-color: #6fdd8b;       /* "works today" green */
+  --text-color: #eaf0f7;
+  --muted-color: #8ea2ba;
+  --line-color: #24334d;
+  --card-bg: #131e33;          /* card surface, one step up from bg */
+  --card-border: #24334d;
+
+  /* Layout */
+  --slide-padding: 40px 64px;
+  --content-gap: 24px;
+}
+
+/* ===========================================
+   BASE
+   =========================================== */
+.reveal-viewport {
+  background: var(--background-color);
+}
+
+.reveal {
+  font-family: var(--body-font);
+  font-size: var(--base-font-size);
+  color: var(--text-color);
+}
+
+.reveal .slides section {
+  padding: var(--slide-padding);
+  text-align: left;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* vertical-stack wrappers must not add their own padding on top of the
+   inner slide's, or nested slides shift right and clip off-canvas */
+.reveal .slides section.stack {
+  padding: 0;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-family: var(--heading-font);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--text-color);
+  margin-bottom: 18px;
+}
+
+.reveal h1 { font-size: var(--h1-size); font-weight: 700; }
+.reveal h2 { font-size: var(--h2-size); font-weight: 700; }
+.reveal h3 { font-size: var(--h3-size); font-weight: 600; }
+
+.reveal h2 .accent, .reveal h1 .accent { color: var(--primary-color); }
+
+.reveal p, .reveal li {
+  font-size: var(--text-size);
+  line-height: 1.45;
+  color: var(--text-color);
+}
+
+.reveal ul, .reveal ol {
+  display: block;
+  margin-left: 1.1em;
+}
+
+.reveal li { margin-bottom: 8px; }
+
+.reveal ul li::marker { color: var(--primary-color); }
+
+.reveal strong { color: #ffffff; font-weight: 600; }
+
+.reveal em { color: var(--secondary-color); font-style: normal; }
+
+.reveal a {
+  color: var(--primary-color);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(79, 214, 232, 0.35);
+}
+
+.reveal code {
+  font-family: var(--mono-font);
+  font-size: 0.92em;
+  color: var(--primary-color);
+  background: rgba(79, 214, 232, 0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* ===========================================
+   CONTENT WRAPPER
+   =========================================== */
+.reveal .content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--content-gap);
+  height: calc(100% - 90px);
+}
+
+/* ===========================================
+   KICKER / TITLE PAGE
+   =========================================== */
+.reveal .kicker {
+  font-family: var(--mono-font);
+  font-size: 12pt;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 14px;
+}
+
+.reveal .subtitle {
+  font-size: 20pt;
+  color: var(--muted-color);
+  font-weight: 400;
+}
+
+.reveal .byline {
+  font-size: 14pt;
+  color: var(--text-color);
+}
+
+/* ===========================================
+   SECTION DIVIDERS
+   =========================================== */
+.reveal .section-divider {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.reveal .section-divider h1 {
+  font-size: 44pt;
+  border-left: 6px solid var(--primary-color);
+  padding-left: 28px;
+}
+
+.reveal .section-divider p {
+  font-size: 17pt;
+  color: var(--muted-color);
+  padding-left: 34px;
+}
+
+/* ===========================================
+   CARDS
+   =========================================== */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 18px 22px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+
+.card .card-tag {
+  font-family: var(--mono-font);
+  font-size: 10.5pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-color);
+  margin-bottom: 6px;
+}
+
+.card p, .card li { font-size: 14pt; }
+.card li { margin-bottom: 5px; }
+
+/* accent-topped variants */
+.card.cyan  { border-top: 3px solid var(--primary-color); }
+.card.amber { border-top: 3px solid var(--secondary-color); }
+.card.green { border-top: 3px solid var(--good-color); }
+
+/* ===========================================
+   CALLOUT — "the point" strip
+   =========================================== */
+.callout {
+  border-left: 4px solid var(--secondary-color);
+  background: rgba(242, 179, 76, 0.07);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 20px;
+}
+
+.callout p {
+  font-size: 16pt;
+  margin: 0;
+}
+
+.callout.cyan {
+  border-left-color: var(--primary-color);
+  background: rgba(79, 214, 232, 0.07);
+}
+
+/* ===========================================
+   TERMINAL BOX — recurring motif
+   =========================================== */
+.terminal {
+  background: #080d16;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.terminal .terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  background: #111a2b;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.terminal .terminal-bar i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.terminal .terminal-bar i:nth-child(1) { background: #f2655a; }
+.terminal .terminal-bar i:nth-child(2) { background: #f2b34c; }
+.terminal .terminal-bar i:nth-child(3) { background: #6fdd8b; }
+
+.terminal .terminal-bar p {
+  font-family: var(--mono-font);
+  font-size: 10.5pt;
+  color: var(--muted-color);
+  margin: 0 0 0 8px;
+}
+
+.terminal .terminal-body {
+  padding: 14px 18px;
+}
+
+.terminal .terminal-body p {
+  font-family: var(--mono-font);
+  font-size: 13.5pt;
+  line-height: 1.55;
+  margin: 0 0 6px 0;
+  color: var(--text-color);
+}
+
+.terminal .terminal-body p .prompt { color: var(--good-color); font-weight: 600; }
+.terminal .terminal-body p .cmd    { color: var(--primary-color); }
+.terminal .terminal-body p .dim    { color: var(--muted-color); }
+
+/* ===========================================
+   PILLS — tool/category chips
+   =========================================== */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill {
+  font-family: var(--mono-font);
+  font-size: 12pt;
+  color: var(--text-color);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 5px 14px;
+  margin: 0;
+}
+
+.pill b { color: var(--primary-color); font-weight: 600; }
+
+/* ===========================================
+   FLOW DIAGRAM — box → box → box
+   =========================================== */
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.flow .flow-box {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-align: center;
+  flex: 1;
+}
+
+.flow .flow-box p { font-size: 13pt; margin: 0; line-height: 1.3; }
+.flow .flow-box p.flow-title {
+  font-family: var(--mono-font);
+  font-size: 13.5pt;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 4px;
+}
+.flow .flow-box p.flow-sub { font-size: 11.5pt; color: var(--muted-color); }
+
+.flow .flow-arrow {
+  font-size: 20pt;
+  color: var(--secondary-color);
+  flex: 0 0 auto;
+}
+.flow .flow-arrow p { margin: 0; font-size: 20pt; color: var(--secondary-color); }
+
+/* numbered step list for the bridge flow */
+.step-list { list-style: none; margin-left: 0 !important; counter-reset: step; }
+.step-list li {
+  counter-increment: step;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.step-list li::before {
+  content: counter(step);
+  font-family: var(--mono-font);
+  font-weight: 600;
+  font-size: 13pt;
+  color: var(--background-color);
+  background: var(--primary-color);
+  border-radius: 6px;
+  min-width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  position: relative;
+  top: 4px;
+}
+
+/* check / cross lists for the posture slide */
+.check-list { list-style: none; margin-left: 0 !important; }
+.check-list li { padding-left: 34px; position: relative; }
+.check-list li::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f00c";
+  color: var(--good-color);
+  position: absolute;
+  left: 0;
+}
+.check-list.crosses li::before { content: "\f00d"; color: var(--secondary-color); }
+
+/* ===========================================
+   FOOTNOTE + BUILD STAMP
+   =========================================== */
+.reveal .footnote {
+  position: absolute;
+  bottom: 18px;
+  left: 64px;
+  right: 64px;
+  font-size: var(--footnote-size);
+  color: var(--muted-color);
+}
+
+#buildstamp-wrap {
+  position: fixed;
+  bottom: 8px;
+  left: 12px;
+  z-index: 40;
+  font-family: var(--mono-font);
+  font-size: 9pt;
+  color: #3d4f6b;
+}
+
+/* ===========================================
+   TEXT UTILITIES
+   =========================================== */
+.text-lg  { font-size: 18pt !important; }
+.text-xl  { font-size: 20pt !important; }
+.text-2xl { font-size: 24pt !important; }
+.text-3xl { font-size: 28pt !important; }
+.text-4xl { font-size: 32pt !important; }
+.text-sm  { font-size: 13pt !important; }
+.text-muted  { color: var(--muted-color) !important; }
+.text-center { text-align: center !important; }
+.mono { font-family: var(--mono-font) !important; }
+
+/* reveal chrome */
+.reveal .progress { color: var(--primary-color); }
+.reveal .controls { color: var(--primary-color); }
+.reveal .slide-number {
+  font-family: var(--mono-font);
+  background: transparent;
+  color: #3d4f6b;
+  font-size: 11pt;
+}
