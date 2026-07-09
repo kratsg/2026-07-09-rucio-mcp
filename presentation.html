@@ -61,13 +61,13 @@
         <h2>This is already happening, with or without us</h2>
         <div class="content">
           <ul class="text-xl" style="margin-top: 10px;">
-            <li style="margin-bottom: 18px;">LLM agents (Claude Code, Gemini CLI, Codex, &hellip;) are on our users' laptops and analysis facilities <strong>today</strong></li>
-            <li style="margin-bottom: 18px;">Physicists already ask them Rucio questions: <em>where is my dataset, why is my rule stuck, do I have quota?</em></li>
-            <li style="margin-bottom: 18px;">Without a proper interface, the agent improvises: pattern-matched CLI calls, scraped output, guessed conventions. And it makes those mistakes <strong>with your credentials</strong></li>
-            <li><strong>MCP</strong> (Model Context Protocol) is the industry standard for giving agents structured, permissioned access to a service</li>
+            <li style="margin-bottom: 18px;">Claude Code, Gemini CLI, Codex: on our users' laptops and facilities <strong>today</strong></li>
+            <li style="margin-bottom: 18px;">They already get Rucio questions: <em>where is my dataset, why is my rule stuck, do I have quota?</em></li>
+            <li style="margin-bottom: 18px;">Without a real interface, the agent improvises: guessed CLI calls, scraped output. Mistakes made <strong>with your credentials</strong></li>
+            <li><strong>MCP</strong> (Model Context Protocol) is the industry standard for structured, permissioned agent access</li>
           </ul>
           <div class="callout" style="margin-top: 14px;">
-            <p class="text-lg">The question isn't <strong>whether</strong> agents talk to Rucio. It's whether they do it through an interface we design, review, and control.</p>
+            <p class="text-lg">The question isn't <strong>whether</strong> agents talk to Rucio. It's whether we design, review, and control the interface.</p>
           </div>
         </div>
         <aside class="notes">
@@ -87,18 +87,18 @@
               <p class="card-tag">Belle II &middot; BNL</p>
               <h3>Rucio MCP PoC</h3>
               <ul>
-                <li>C&eacute;dric Serfon: ~10 tools, shown at the Nov 2025 DDM workshop</li>
-                <li>Live demo: classifying stuck rules by error type from a Gemini CLI prompt</li>
-                <li>Plus a RAG prototype answering Rucio support questions</li>
+                <li>C&eacute;dric Serfon: ~10 tools, shown Nov 2025 (DDM workshop)</li>
+                <li>Demo: classifying stuck rules from a Gemini CLI prompt</li>
+                <li>Plus a RAG support-bot prototype</li>
               </ul>
             </div>
             <div class="card green">
               <p class="card-tag">EIC / ePIC &middot; also DUNE</p>
               <h3>rucio-eic-mcp-server</h3>
               <ul>
-                <li>Based on the Belle II PoC, forked and adapted within weeks</li>
+                <li>Forked from the Belle II PoC within weeks</li>
                 <li>13 tools; x509 and userpass auth</li>
-                <li>In use by EIC and DUNE colleagues</li>
+                <li>Used by EIC and DUNE</li>
               </ul>
             </div>
             <div class="card cyan">
@@ -106,13 +106,13 @@
               <h3>rucio-mcp</h3>
               <ul>
                 <li>44 tools, read + write, any Rucio instance</li>
-                <li>Multi-user hosted deployment with per-user identity</li>
-                <li>On PyPI &amp; conda-forge; docs, tests, Helm chart</li>
+                <li>Hosted multi-user, per-user identity</li>
+                <li>PyPI &amp; conda-forge; docs, tests, Helm chart</li>
               </ul>
             </div>
           </div>
           <div class="callout cyan">
-            <p>Independent teams built the same thing three times in months: the demand is real, and the people are willing. The waste is only if we <strong>stay</strong> split: 3&times; security reviews, 3&times; auth code, 3&times; every bugfix.</p>
+            <p>Three independent builds in months: the demand is real. The waste is <strong>staying</strong> split: 3&times; security reviews, 3&times; auth code, 3&times; every bugfix.</p>
           </div>
         </div>
         <aside class="notes">
@@ -147,10 +147,10 @@
             </div>
           </div>
           <ul class="text-xl" style="margin-top: 30px;">
-            <li style="margin-bottom: 16px;"><strong>Tools</strong>: typed functions the LLM may call (<code>rucio_list_dids</code>, <code>rucio_get_rse_usage</code>, &hellip;)</li>
-            <li style="margin-bottom: 16px;"><strong>Resources</strong>: context documents the LLM can read (e.g. your dataset nomenclature)</li>
-            <li style="margin-bottom: 16px;">Write one server &rarr; every MCP client works, on every platform</li>
-            <li>The LLM never talks to Rucio directly: it can only do what the tools allow, <strong>as the authenticated user</strong></li>
+            <li style="margin-bottom: 16px;"><strong>Tools</strong>: typed functions the LLM may call (<code>rucio_list_dids</code>, &hellip;)</li>
+            <li style="margin-bottom: 16px;"><strong>Resources</strong>: context the LLM can read (your dataset nomenclature)</li>
+            <li style="margin-bottom: 16px;">One server &rarr; every MCP client works</li>
+            <li>The LLM never touches Rucio directly: only what the tools allow, <strong>as the authenticated user</strong></li>
           </ul>
         </div>
         <aside class="notes">
@@ -190,21 +190,21 @@
             <div class="card cyan">
               <p class="card-tag">designed for agents</p>
               <ul>
-                <li>Every tool paginates and returns <strong>next-step hints</strong> so the LLM chains calls sensibly</li>
-                <li>Errors are classified and explained, never raw tracebacks</li>
-                <li>Byte counts humanized, DIDs parsed with Rucio's own <code>extract_scope</code></li>
+                <li>Every tool paginates and returns <strong>next-step hints</strong></li>
+                <li>Errors classified and explained, never raw tracebacks</li>
+                <li>Bytes humanized; DIDs parsed with Rucio's own <code>extract_scope</code></li>
               </ul>
             </div>
             <div class="card cyan">
               <p class="card-tag">engineering hygiene</p>
               <ul>
-                <li>Unit + integration + live test suites, CI, coverage tracking</li>
-                <li>Documentation on ReadTheDocs; typed, linted, pre-commit enforced</li>
-                <li>Install anywhere: <code>pip</code> / <code>uvx rucio-mcp</code> / <code>pixi add rucio-mcp</code> (conda-forge)</li>
+                <li>Unit, integration, and live test suites; CI + coverage</li>
+                <li>Docs on ReadTheDocs; typed, linted, pre-commit</li>
+                <li><code>pip</code> / <code>uvx rucio-mcp</code> / <code>pixi add rucio-mcp</code> (conda-forge)</li>
               </ul>
             </div>
           </div>
-          <p class="text-muted">44 tools total, covering the full Rucio user surface: discovery, replicas, rule lifecycle (create / update / move / approve), quotas, transfer monitoring.</p>
+          <p class="text-muted">The full Rucio user surface: discovery, replicas, rule lifecycle, quotas, transfers.</p>
         </div>
         <aside class="notes">
           The message is "not a prototype". Coverage is the complete user-facing Rucio surface,
@@ -230,21 +230,21 @@
               </div>
               <ul>
                 <li>A preset is just the site's <code>rucio.cfg</code> + one registry entry</li>
-                <li>Step-by-step guide: <em>&ldquo;Contributing a new site&rdquo;</em> in the docs</li>
-                <li>Belle II preset drafted with Giacomo; BNL OIDC config under validation</li>
+                <li><em>&ldquo;Contributing a new site&rdquo;</em> guide in the docs</li>
+                <li>Belle II drafted with Giacomo; config under validation</li>
               </ul>
             </div>
             <div>
               <h3>Nomenclature as context</h3>
               <ul>
-                <li>Each site ships a markdown file the LLM reads as an MCP resource: dataset naming, scopes, conventions</li>
-                <li>ATLAS one exists (AMI tags, DAOD formats, DID structure)</li>
+                <li>One markdown file per site, served to the LLM: naming, scopes, conventions</li>
+                <li>ATLAS exists (AMI tags, DAOD formats)</li>
                 <li><strong>Open invitations</strong>: DUNE <a class="mono text-sm" href="https://github.com/kratsg/rucio-mcp/issues/30">#30</a>, CMS <a class="mono text-sm" href="https://github.com/kratsg/rucio-mcp/issues/31">#31</a>, ESCAPE <a class="mono text-sm" href="https://github.com/kratsg/rucio-mcp/issues/32">#32</a></li>
               </ul>
             </div>
           </div>
           <div class="callout cyan">
-            <p>You know your experiment's conventions; the server gives them a slot. Contributing your site is a <strong>one-file PR</strong>, not a fork.</p>
+            <p>Your conventions get a slot. Contributing your site is a <strong>one-file PR</strong>, not a fork.</p>
           </div>
         </div>
         <aside class="notes">
@@ -264,31 +264,31 @@
               <p class="card-tag">stdio &middot; local</p>
               <h3>Your laptop or login node</h3>
               <ul>
-                <li>Uses your existing credentials: <strong>x509 proxy, userpass, or OIDC</strong></li>
-                <li>Same environment as the <code>rucio</code> CLI: if that works, this works</li>
-                <li>One line in your MCP client config</li>
+                <li>Your existing credentials: <strong>x509 proxy, userpass, or OIDC</strong></li>
+                <li>If the <code>rucio</code> CLI works, this works</li>
+                <li>One line of MCP client config</li>
               </ul>
             </div>
             <div class="card cyan">
               <p class="card-tag">http &middot; multi-user</p>
               <h3>Hosted for a community</h3>
               <ul>
-                <li>One deployment, many users, many sites (path-mounted per experiment)</li>
-                <li>OAuth 2.1 login in front &rarr; <strong>each user's own Rucio identity</strong> behind</li>
-                <li>No client software to install at all</li>
+                <li>One deployment: many users, many sites</li>
+                <li>OAuth 2.1 in front; <strong>each user's own Rucio identity</strong> behind</li>
+                <li>Nothing to install</li>
               </ul>
             </div>
             <div class="card amber">
               <p class="card-tag">http &middot; shared secret</p>
               <h3>Pre-authenticated service</h3>
               <ul>
-                <li>Single service identity (e.g. a VOMS proxy on a service host) behind a static bearer</li>
-                <li>For gated group accounts, dashboards, shifter bots</li>
+                <li>One service identity (e.g. a VOMS proxy) behind a static bearer</li>
+                <li>For group accounts, dashboards, shifter bots</li>
               </ul>
             </div>
           </div>
           <div class="callout">
-            <p><code>--read-only</code> works in every mode: all write tools refuse before touching Rucio. Operators deploy with a <strong>Helm chart</strong>; Prometheus metrics built in.</p>
+            <p><code>--read-only</code> works in every mode. <strong>Helm chart</strong> for operators; Prometheus metrics built in.</p>
           </div>
         </div>
         <aside class="notes">
@@ -318,26 +318,26 @@
               <p class="card-tag">the mismatch</p>
               <ul>
                 <li>MCP clients speak standard <strong>OAuth 2.1</strong> (auth code + PKCE)</li>
-                <li>Rucio speaks its own <strong>OIDC polling flow</strong>; users never hold raw IdP tokens</li>
-                <li>Naive fixes: register every client at each IAM (unscalable) or proxy credentials (unacceptable)</li>
+                <li>Rucio speaks its own <strong>OIDC polling flow</strong>; users never hold IdP tokens</li>
+                <li>Registering clients at every IAM doesn't scale; proxying credentials is worse</li>
               </ul>
             </div>
             <div class="card cyan">
               <p class="card-tag">the bridge</p>
               <ul>
-                <li>rucio-mcp presents an OAuth 2.1 authorization server to the client&hellip;</li>
-                <li>&hellip;and internally drives Rucio's own <code>/auth/oidc</code> polling flow</li>
-                <li>The MCP access token <strong>is</strong> the Rucio session token, passed through verbatim</li>
+                <li>Presents an OAuth 2.1 authorization server to the client&hellip;</li>
+                <li>&hellip;and drives Rucio's own <code>/auth/oidc</code> polling flow behind it</li>
+                <li>The MCP access token <strong>is</strong> the Rucio session token, verbatim</li>
               </ul>
             </div>
           </div>
           <ol class="step-list" style="margin-top: 4px;">
-            <li><p>MCP client connects &rarr; browser opens &rarr; user logs in at <strong>their own IdP</strong> (CERN SSO, institutional login, &hellip;)</p></li>
-            <li><p>Rucio's auth server mints the session token, exactly as it does for the CLI</p></li>
-            <li><p>Every tool call then carries that token: the user's normal Rucio identity, permissions, and audit trail</p></li>
+            <li><p>Client connects &rarr; browser opens &rarr; user logs in at <strong>their own IdP</strong></p></li>
+            <li><p>Rucio mints the session token, exactly as for the CLI</p></li>
+            <li><p>Every tool call carries that token: normal identity, permissions, audit trail</p></li>
           </ol>
           <div class="callout cyan">
-            <p><strong>No IAM registration by anyone</strong>: not operators, not users. User experience: click, log in, done.</p>
+            <p><strong>No IAM registration by anyone.</strong> Click, log in, done.</p>
           </div>
         </div>
         <aside class="notes">
@@ -355,18 +355,18 @@
         <div class="content">
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 36px;">
             <ul class="check-list">
-              <li><strong>Rucio stays the sole authority.</strong> Tokens are passed through, never wrapped or re-signed; a stale token is a 401 and a fresh login</li>
-              <li><strong>No stored credentials.</strong> No secrets database; in-flight auth state is in-memory with a 5-minute TTL</li>
-              <li><strong>Every action is the user's own identity.</strong> Normal Rucio ACLs, quotas, and audit logs apply unchanged</li>
+              <li><strong>Rucio stays the sole authority.</strong> Tokens pass through unmodified; stale token &rarr; 401 &rarr; fresh login</li>
+              <li><strong>No stored credentials.</strong> In-flight state in memory, 5-minute TTL</li>
+              <li><strong>Every action is the user's own identity.</strong> Rucio ACLs, quotas, audit apply unchanged</li>
             </ul>
             <ul class="check-list">
-              <li><strong>No open registration.</strong> Dynamic Client Registration removed; clients identified by CIMD metadata URLs, SSRF-guarded</li>
+              <li><strong>No open registration.</strong> DCR removed; clients identified by CIMD, SSRF-guarded</li>
               <li><strong>Writes are opt-in.</strong> <code>--read-only</code> gates all mutating tools server-side</li>
-              <li><strong>Observable.</strong> Prometheus metrics for auth outcomes, tool calls, and bridge sessions</li>
+              <li><strong>Observable.</strong> Prometheus metrics: auth outcomes, tool calls, sessions</li>
             </ul>
           </div>
           <div class="callout">
-            <p>Honest caveat: this layer is <em>exactly</em> what deserves community security review, and that's the argument for one codebase. <strong>One implementation means one review, hardened once, for everyone.</strong></p>
+            <p>This layer <em>deserves</em> community security review. <strong>One implementation: one review, hardened once, for everyone.</strong></p>
           </div>
         </div>
         <aside class="notes">
@@ -386,9 +386,9 @@
             <div>
               <ul class="text-lg">
                 <li>One deployment at the UChicago Analysis Facility</li>
-                <li>Serving <strong>ATLAS, CMS, DUNE, ESCAPE</strong>, with Belle II next</li>
-                <li>Deployed from the Helm chart; metrics scraped in Prometheus</li>
-                <li>Users bring their own identity via the OAuth bridge; nothing to install</li>
+                <li>Serving <strong>ATLAS, CMS, DUNE, ESCAPE</strong>; Belle II next</li>
+                <li>Helm-deployed, Prometheus-scraped</li>
+                <li>Users bring their own identity; nothing to install</li>
               </ul>
             </div>
             <div class="terminal">
@@ -403,7 +403,7 @@
             </div>
           </div>
           <div class="callout cyan">
-            <p>This is the multi-experiment claim made concrete: <strong>four communities, one server, zero IAM registrations, zero per-user setup.</strong></p>
+            <p><strong>Four communities, one server, zero IAM registrations, zero per-user setup.</strong></p>
           </div>
         </div>
         <aside class="notes">
@@ -429,23 +429,23 @@
           <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
             <div class="card cyan">
               <p class="card-tag">security</p>
-              <p>One codebase to review, one auth layer to harden, one place to patch when the MCP spec or auth drafts move (they move <em>fast</em>: CIMD replaced DCR here within months)</p>
+              <p>One codebase to review, one auth layer to harden, one place to patch as the spec moves (CIMD replaced DCR within months)</p>
             </div>
             <div class="card cyan">
               <p class="card-tag">effort</p>
-              <p>Rucio client quirks, pagination, error handling: fixed <strong>once</strong>. Experiments contribute the thin parts (a site preset and a nomenclature file), not whole servers</p>
+              <p>Client quirks, pagination, errors: fixed <strong>once</strong>. Experiments contribute a preset and a nomenclature file, not servers</p>
             </div>
             <div class="card cyan">
               <p class="card-tag">users</p>
-              <p>Same tools, same docs, same behavior whether you're on ATLAS, Belle II, or DUNE; support knowledge and prompts transfer between experiments</p>
+              <p>Same tools, docs, and behavior on every experiment; support knowledge and prompts transfer</p>
             </div>
             <div class="card green">
               <p class="card-tag">the prior art</p>
-              <p>Belle II and EIC's work isn't discarded: it validated the demand and shaped requirements. Missing a tool from those servers? That's an issue, not a fork. Ideas are very welcome upstream</p>
+              <p>Belle II and EIC's work validated the demand and shaped requirements. Missing a tool? That's an issue, not a fork</p>
             </div>
           </div>
           <div class="callout cyan">
-            <p>This is how our community handles shared infrastructure everywhere else: we don't each maintain a private FTS. <strong>An agent interface deserves the same treatment.</strong></p>
+            <p>We don't each maintain a private FTS. <strong>An agent interface deserves the same treatment.</strong></p>
           </div>
         </div>
         <aside class="notes">
@@ -460,27 +460,27 @@
       <section id="maintenance">
         <h2>The honest slide: maintenance &amp; governance</h2>
         <div class="content">
-          <p class="text-lg">Rucio can't bless something unmaintained in a sensitive spot; agreed. Options, in increasing commitment:</p>
+          <p class="text-lg">Rucio can't bless something unmaintained in a sensitive spot. Agreed. The options:</p>
           <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
             <div class="card">
               <p class="card-tag">option 1 &middot; endorse</p>
               <h3>Community-blessed</h3>
-              <p>Stays where it is; Rucio docs point to it as <em>the</em> MCP server. Lowest commitment, but the maintenance question is deferred, not answered</p>
+              <p>Rucio docs point here as <em>the</em> MCP server. Lowest commitment; defers the maintenance question</p>
             </div>
             <div class="card">
               <p class="card-tag">option 2 &middot; affiliate</p>
               <h3>Rucio-adjacent project</h3>
-              <p>Moves to a shared org with named co-maintainers from &ge;2 institutes; Rucio team does a security review, no upstream burden</p>
+              <p>Shared org, co-maintainers from &ge;2 institutes, Rucio security review. No upstream burden</p>
             </div>
             <div class="card cyan">
               <p class="card-tag">option 3 &middot; adopt</p>
               <h3>Experimental upstream</h3>
-              <p>Lives under <span class="mono text-sm">rucio/</span> as an experimental component, inside Rucio's release &amp; security process, with an agreed maintainer group</p>
+              <p>Experimental component under <span class="mono text-sm">rucio/</span>, inside its release &amp; security process</p>
             </div>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-            <div class="callout cyan"><p><strong>What I bring:</strong> continued active maintenance, releases, docs, and support. This is infrastructure I run in production, not a side demo.</p></div>
-            <div class="callout"><p><strong>What it needs from you:</strong> 1&ndash;2 co-maintainers, a security review pass, and a site owner per experiment.</p></div>
+            <div class="callout cyan"><p><strong>What I bring:</strong> active maintenance, releases, docs. I run this in production.</p></div>
+            <div class="callout"><p><strong>What it needs:</strong> 1&ndash;2 co-maintainers, a security review, a site owner per experiment.</p></div>
           </div>
         </div>
         <aside class="notes">
@@ -500,9 +500,9 @@
           <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 28px;">
             <div>
               <ul class="text-lg">
-                <li>Stock Claude Code, connected to <a class="mono text-sm" href="https://rucio-mcp.af.uchicago.edu">rucio-mcp.af.uchicago.edu</a> with only a URL</li>
-                <li>Log in live through the OAuth bridge with my own identity</li>
-                <li>Then ask it real questions. Suggest your own!</li>
+                <li>Stock Claude Code, pointed at <a class="mono text-sm" href="https://rucio-mcp.af.uchicago.edu">rucio-mcp.af.uchicago.edu</a></li>
+                <li>Live login through the OAuth bridge, my own identity</li>
+                <li>Real questions. Suggest your own!</li>
               </ul>
             </div>
             <div class="terminal">
@@ -541,15 +541,15 @@
               <div class="card cyan">
                 <p class="card-tag">this afternoon</p>
                 <p class="mono" style="font-size: 13pt;">uvx rucio-mcp serve<br>&nbsp;&nbsp;--site &lt;yours&gt; --read-only</p>
-                <p>&hellip;or just point your client at the hosted URL. Kick the tires, file issues.</p>
+                <p>&hellip;or point your client at the hosted URL. File issues.</p>
               </div>
               <div class="card cyan">
                 <p class="card-tag">this month</p>
-                <p>Bring your site: one <code>rucio.cfg</code> preset + a nomenclature file. DUNE, CMS, ESCAPE slots are open; Belle II is nearly merged.</p>
+                <p>Bring your site: a <code>rucio.cfg</code> preset + a nomenclature file. DUNE, CMS, ESCAPE slots open.</p>
               </div>
               <div class="card amber">
                 <p class="card-tag">as a community</p>
-                <p>Pick a maintenance model (endorse, affiliate, or adopt) and name the people. I'm committed either way; it works better together.</p>
+                <p>Pick a maintenance model (endorse, affiliate, adopt) and name the people. I'm committed either way.</p>
               </div>
             </div>
             <div class="callout cyan">
