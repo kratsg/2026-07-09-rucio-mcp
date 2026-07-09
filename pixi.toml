@@ -1,0 +1,22 @@
+[workspace]
+name = "2026-07-09-rucio-mcp"
+description = "Slides: rucio-mcp — one MCP server for the Rucio community"
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "osx-64", "linux-64"]
+
+[dependencies]
+nodejs = ">=22"
+
+[tasks]
+# one-time: install decktape + puppeteer (used by check/screenshots/pdf)
+install = "npm install"
+# flag any slide whose content exceeds the fixed 1280x720 canvas
+check = "node scripts/check-overflow.js presentation.html"
+# screenshot every slide into a timestamped folder (export mode disables animations)
+screenshots = "mkdir -p screenshots/$(date +%Y%m%d_%H%M%S) && bash scripts/decktape.sh 'presentation.html?export' output.pdf --screenshots --screenshots-directory screenshots/$(date +%Y%m%d_%H%M%S)"
+# render the deck to a shareable PDF
+pdf = "bash scripts/decktape.sh 'presentation.html?export' slides.pdf"
+# serve locally (reveal.js loads from CDN, so plain file:// also works)
+serve = "npx http-server -p 8080 -c-1 ."
+# click-to-edit text in the browser, saves back to presentation.html
+edit = "node scripts/edit-html.js presentation.html"

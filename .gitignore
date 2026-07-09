@@ -1,0 +1,14 @@
+# pixi environments
+.pixi/
+
+# node dependencies (decktape/puppeteer for the verify loop)
+node_modules/
+
+# build artifacts
+screenshots/
+output.pdf
+slides.pdf
+_site/
+
+# OS / editor
+.DS_Store
